@@ -18,8 +18,8 @@ mov = 0
 alt1 = random.random() * 32000
 alt2 = alt1
 altR = alt1
-inc = alt1*0.03
-mov = alt1*0.05
+inc = alt1*0.003
+mov = alt1*0.005
 
 state = 1
 
