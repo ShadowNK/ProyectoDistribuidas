@@ -23,8 +23,8 @@ cord2 = cord1
 cordR = cord1
 la = 0.0
 lo = 0.0
-inc = [lat*0.005, lon*0.005]
-mov = [lat*0.05, lon*0.05]
+inc = [lat*0.0005, lon*0.0005]
+mov = [lat*0.005, lon*0.005]
 
 state = 1
 
