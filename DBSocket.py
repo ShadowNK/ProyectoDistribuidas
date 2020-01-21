@@ -19,7 +19,7 @@ def reciver():
     writter(reply.decode())
 
 def writter(data):
-    file = open('D:\PyChram\ProyectoDistribuidas\Data.txt','a')
+    file = open('C:/Users/USRBET/Desktop/ProyectoDistribuidas-master/Data.txt','a')
     if(len(data) != 0):
         file.write(data)
     file.close()

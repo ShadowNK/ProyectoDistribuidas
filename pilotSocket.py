@@ -15,7 +15,7 @@ sock.connect(server)
 
 def reciver():
     reply = sock.recv(1024)
-    print (repr(reply.decode()))
+    print (reply.decode())
 
 
 # Comunicacion

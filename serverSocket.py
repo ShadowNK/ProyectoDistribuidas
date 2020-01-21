@@ -76,17 +76,15 @@ def on_new_p(clientsocket,addr):
         pilot_calc()
 
 def pilot_calc():
-    time = datetime.datetime.now()
-    timeaux = 1
-    aux = time[5]%10
-    if(time[5]%2 == 0 & timeaux != aux):
-        timeaux = aux
+    if(AltCon >= 40 | GPSCon >= 20):
         resend_to_p()
         data = [0, 0, 0]
+        AltCon = 0
+        GPSCon = 0
 
 def resend_to_p():
     (clientsocket,addr) = pilot
-    msg = 'ALTURA: ' + (data[0]/AltCon) + '\nGPS: Lat: ' + (data[1]/GPSCon) + ' Lon: ' + (data[2]/GPSCon)
+    msg = 'ALTURA: ' + str(data[0]/AltCon) + '\nGPS: Lat: ' + str(data[1]/GPSCon) + ' Lon: ' + str(data[2]/GPSCon)
     clientsocket.send(msg.encode())
 
 
