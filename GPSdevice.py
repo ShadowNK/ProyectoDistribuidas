@@ -5,7 +5,7 @@ import time
 # Creating a GPS devices
 
 # Variables
-HOST = 'localhost'  # Direccion IP del servidor
+HOST = '172.31.108.23'  # Direccion IP del servidor
 PORT = 50010
 server = (HOST, PORT)
 
@@ -21,6 +21,8 @@ cord1[0] = lat
 cord1[1] = lon
 cord2 = cord1
 cordR = cord1
+la = 0.0
+lo = 0.0
 inc = [lat*0.005, lon*0.005]
 mov = [lat*0.05, lon*0.05]
 
@@ -36,11 +38,14 @@ def sender():
     message = 'GPS1: \n\tLAT: ' + str(cord1[0]) +' LON: ' + str(cord1[1]) + '\n'
     if(state == 1):
         message += 'GPS2: \n\tLAT: ' + str(cord2[0]) +' LON: ' + str(cord2[1]) + '\n'
-        msg = str(cord1[0]+cord2[0]) + '/' + str(cord1[1]+cord2[1]) + '/' + message
+        la = cord1[0]+cord2[0]
+        lo = cord1[1]+cord2[1]
     else:
         message += 'GPS Respuesto: \n\tLAT: ' + str(cordR[0]) +'LON: ' + str(cordR[1]) + '\n' +'ERROR EN GPS2\n'
-        msg = str(cord1[0]+cordR[0]) + '/' + str(cord1[1]+cordR[1]) + '/' + message
+        la = cord1[0]+cordR[0]
+        lo = cord1[1]+cordR[1]
     #print(message)
+    msg = str(la) + '/' + str(lo) + '/' + message
     sock.send(msg.encode())
 
 def validador():

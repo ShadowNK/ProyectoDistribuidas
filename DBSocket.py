@@ -3,7 +3,7 @@ from _thread import *
 # Creating a clientsocket
 
 # Variables
-HOST = 'localhost'  # Direccion IP del servidor
+HOST = '172.31.108.23'  # Direccion IP del servidor
 PORT = 50010
 server = (HOST, PORT)
 

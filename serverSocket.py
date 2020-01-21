@@ -3,7 +3,7 @@ from _thread import *
 from decimal import Decimal
 import datetime
 
-HOST = 'localhost'  # Direccion IP del seridor
+HOST = '172.31.108.23'  # Direccion IP del seridor
 PORT = 50010
 bd = (socket(),'')
 pilot = (socket(),'')
@@ -32,6 +32,7 @@ def on_new_alt(clientsocket,addr):
             aux = msg.decode().split('/')
             data[0] += Decimal(aux[0])
             AltCon += 2
+            #print('pr: ' + str(data[0]))
             resend_to_BD(aux[1].encode())
 
     clientsocket.close()
@@ -40,6 +41,7 @@ def on_new_alt(clientsocket,addr):
 ## Devices GPS
 
 def on_new_gps(clientsocket,addr):
+    global data, GPSCon
     print ("Conectado con GPS: ", addr)
     while True:
         msg = clientsocket.recv(1024)
@@ -48,6 +50,7 @@ def on_new_gps(clientsocket,addr):
             data[1] += Decimal(aux[0])
             data[2] += Decimal(aux[1])
             GPSCon += 2
+            #print('pr: ' + str(data[1]) + 'pr: ' + str(data[2]))
             resend_to_BD(aux[2].encode())
     clientsocket.close()
 
@@ -61,7 +64,7 @@ def on_new_BD(clientsocket,addr):
 
 def resend_to_BD(ms):
     (clientsocket,addr) = bd
-    print(ms.decode())
+    #print(ms.decode())
     clientsocket.send(ms)
 
 
@@ -76,15 +79,20 @@ def on_new_p(clientsocket,addr):
         pilot_calc()
 
 def pilot_calc():
+    global data, AltCon, GPSCon
     if(AltCon >= 40 | GPSCon >= 20):
-        resend_to_p()
+        al = data[0]/AltCon
+        la = data[1]/GPSCon
+        lo = data[2]/GPSCon
+        resend_to_p(al, la, lo)
         data = [0, 0, 0]
         AltCon = 0
         GPSCon = 0
 
-def resend_to_p():
+def resend_to_p(al, la, lo):
     (clientsocket,addr) = pilot
-    msg = 'ALTURA: ' + str(data[0]/AltCon) + '\nGPS: Lat: ' + str(data[1]/GPSCon) + ' Lon: ' + str(data[2]/GPSCon)
+    msg = 'ALTURA: ' + str(al) + '\nGPS: Lat: ' + str(la) + ' Lon: ' + str(lo)
+    print(msg)
     clientsocket.send(msg.encode())
 
 
