@@ -1,7 +1,7 @@
 from socket import *
-from _thread import *
 import random
 import time
+
 # Creating a GPS devices
 
 # Variables
@@ -23,8 +23,8 @@ cord2 = cord1
 cordR = cord1
 la = 0.0
 lo = 0.0
-inc = [lat*0.0005, lon*0.0005]
-mov = [lat*0.005, lon*0.005]
+inc = [lat*0.005, lon*0.005]
+mov = [lat*0.05, lon*0.05]
 
 state = 1
 
@@ -51,9 +51,9 @@ def sender():
 def validador():
     plat = (cord2[0] - cord1[0])/cord1[0]
     plon = (cord2[1] - cord1[1])/cord1[1]
-    if (plat > 0.5):
+    if (plat > 0.05):
         state = 0
-    elif (plon > 0.5):
+    elif (plon > 0.05):
         state = 0
 
 # MAIN

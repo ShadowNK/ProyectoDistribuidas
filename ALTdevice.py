@@ -1,7 +1,7 @@
 from socket import *
-from _thread import *
 import random
 import time
+
 # Creating a ALT devices
 
 # Variables
@@ -18,8 +18,8 @@ mov = 0
 alt1 = random.random() * 32000
 alt2 = alt1
 altR = alt1
-inc = alt1*0.003
-mov = alt1*0.005
+inc = alt1*0.03
+mov = alt1*0.05
 
 state = 1
 
@@ -42,7 +42,7 @@ def sender():
 
 def validador():
     palt = (alt2 - alt1)/alt1
-    if (palt > 0.5):
+    if (palt > 0.05):
         state = 0
 
 # MAIN

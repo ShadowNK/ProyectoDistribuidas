@@ -1,5 +1,5 @@
 from socket import *
-from _thread import *
+
 # Creating a clientsocket
 
 # Variables
